@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: nomad-camels-driver-ni-daq
+  version: 0.1.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/nomad_camels_driver_ni_daq-${{ version }}.tar.gz
+  sha256: f67f863b1142cdae8a97f8ff1cc6d8b9041d8f474f1a03986b85d581fe7856e3
+
+build:
+  number: 2
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - setuptools >=61.0
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - nidaqmx-python
+
+tests:
+  - python:
+      imports:
+        - nomad_camels_driver_ni_daq
+      pip_check: true
+
+      python_version: ${{ python_min }}.*
+about:
+  summary: This packes provides everything to communicate with a  National Instruments DAQ instrument with NOMAD-CAMELS
+  license: LGPL-2.1-or-later
+  license_file: LICENSE.txt
+  homepage: https://github.com/FAU-LAP/CAMELS_drivers
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
