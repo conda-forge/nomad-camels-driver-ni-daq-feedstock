@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: nomad-camels-driver-ni-daq
-  version: 0.1.1
+  version: 0.1.3
 
 package:
   name: ${{ name|lower }}
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/nomad_camels_driver_ni_daq-${{ version }}.tar.gz
-  sha256: f67f863b1142cdae8a97f8ff1cc6d8b9041d8f474f1a03986b85d581fe7856e3
+  sha256: 4a8ac087be9490b22ee9883a4309b01686ed4366b9845f765463735ae36fc45d
 
 build:
-  number: 2
+  number: 0
   noarch: python
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -24,8 +24,7 @@ requirements:
     - pip
   run:
     - python >=${{ python_min }}
-    - nidaqmx-python
-
+    - nidaqmx
 tests:
   - python:
       imports:
